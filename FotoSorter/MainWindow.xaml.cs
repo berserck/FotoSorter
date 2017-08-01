@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -34,9 +35,9 @@ namespace FotoSorter
             DirectoryInfo dirInfo = new DirectoryInfo(newFolder);
             try
             {
-                // TODO: select only image and video types
-                FileInfo[] info = dirInfo.GetFiles("*.*", SearchOption.AllDirectories);
-
+                string supportedExtensions = "*.jpg,*.jpe,*.jpeg,*.wmf,*.avi,*.mov";
+                var info = dirInfo.EnumerateFiles("*.*", SearchOption.AllDirectories).
+                    Where(s => !String.IsNullOrEmpty(Path.GetExtension(s.Name)) && supportedExtensions.Contains(Path.GetExtension(s.Name).ToLower()) );
                 foreach (var item in info)
                 {
                     files.Add(new MyFile() { FilenameIn = item.FullName });
@@ -58,10 +59,6 @@ namespace FotoSorter
                     updateInuputFolder(dialog.SelectedPath);
                 }
             }
-            //OpenFileDialog openFileDialog = new OpenFileDialog();
-            //if (openFileDialog.ShowDialog() == true)
-            //    lblInFolder.Text = File.ReadAllText(openFileDialog.FileName);
-
         }
     }
     public class MyFile
