@@ -6,23 +6,20 @@
         xmlns:local="clr-namespace:FotoSorter"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="FotoSorter" Height="488.418" Width="666.384">
-    <Window.Resources>
-        <sys:String x:Key="strHelloWorld">Hello, world!</sys:String>
-        <sys:String x:Key="ComboBoxItems">Items:</sys:String>
+        Title="FotoSorter" Height="800" Width="700">
 
-    </Window.Resources>
-
-    <Grid Background="LightBlue">
-        <ListBox HorizontalAlignment="Left" Height="271" Margin="32,36,0,0" VerticalAlignment="Top" Width="100" />
-        <StackPanel Margin="10">
-            <TextBlock Text="{StaticResource strHelloWorld}" FontSize="56" />
-            <TextBlock>Just another "<TextBlock Text="{StaticResource strHelloWorld}" />" example, but with resources!</TextBlock>
-            <ComboBox ItemsSource="{StaticResource ComboBoxItems}" />
-
-        </StackPanel>
-
-
-    </Grid>
-
+    <StackPanel Margin="15">
+        <Label FontWeight="Bold"> Directorio de Origem:</Label>
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="150" />
+            </Grid.ColumnDefinitions>
+            <TextBox Name="lblInFolder" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}"></TextBox>
+            <Button Grid.Column="1" Click="Button_Click">Onde estao as fotos</Button>
+        </Grid>
+        <Label FontWeight="Bold">Imagens encontradas:</Label>
+        <ListBox Name="lbInFiles" DisplayMemberPath="FilenameIn" MinHeight="100" Margin="10"></ListBox>
+        <Button Width="100">Executar</Button>
+    </StackPanel>
 </Window>

@@ -4,9 +4,8 @@
              xmlns:local="clr-namespace:FotoSorter"
              StartupUri="MainWindow.xaml" Startup="Application_Startup">
     <Application.Resources>
-        <sys:String x:Key="strDefInput">InDefault</sys:String>
-        <sys:String x:Key="strDefOutput">OutDefault</sys:String>
 
+   
 
     </Application.Resources>
 </Application>

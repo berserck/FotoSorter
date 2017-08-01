@@ -15,13 +15,12 @@ namespace FotoSorter
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            
+
 
             //if (e.Args.Length == 2)
             //{
-            //    wnd.OriginFolder = e.Args[0];
-            //    wnd.DestinationFolder = e.Args[1];
-            //    Console.WriteLine("HERE:" + wnd.Resources["ComboBoxItems"].ToString());
+            //    Resources["strDefInput"] = e.Args[0];
+            //    Resources["strDefOutput"] = e.Args[1];
             //}
 
         }
