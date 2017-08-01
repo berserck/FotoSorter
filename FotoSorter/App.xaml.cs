@@ -13,5 +13,17 @@ namespace FotoSorter
     /// </summary>
     public partial class App : Application
     {
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            
+
+            //if (e.Args.Length == 2)
+            //{
+            //    wnd.OriginFolder = e.Args[0];
+            //    wnd.DestinationFolder = e.Args[1];
+            //    Console.WriteLine("HERE:" + wnd.Resources["ComboBoxItems"].ToString());
+            //}
+
+        }
     }
 }

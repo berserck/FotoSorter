@@ -4,9 +4,25 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FotoSorter"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+        Title="FotoSorter" Height="488.418" Width="666.384">
+    <Window.Resources>
+        <sys:String x:Key="strHelloWorld">Hello, world!</sys:String>
+        <sys:String x:Key="ComboBoxItems">Items:</sys:String>
+
+    </Window.Resources>
+
+    <Grid Background="LightBlue">
+        <ListBox HorizontalAlignment="Left" Height="271" Margin="32,36,0,0" VerticalAlignment="Top" Width="100" />
+        <StackPanel Margin="10">
+            <TextBlock Text="{StaticResource strHelloWorld}" FontSize="56" />
+            <TextBlock>Just another "<TextBlock Text="{StaticResource strHelloWorld}" />" example, but with resources!</TextBlock>
+            <ComboBox ItemsSource="{StaticResource ComboBoxItems}" />
+
+        </StackPanel>
+
+
     </Grid>
+
 </Window>

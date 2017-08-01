@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.15
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FotoSorter", "FotoSorter\FotoSorter.csproj", "{53B8236B-615C-44AB-A222-E323BB2C360E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FotoSorterLib", "FotoSorterLib\FotoSorterLib.csproj", "{1F95D934-E687-42E7-9337-EB19B3722108}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FotoSorterLibTests", "FotoSorterLibTests\FotoSorterLibTests.csproj", "{14711F94-2704-4C4A-9185-1932FDA0BA69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FotoSorterCli", "FotoSorterCli\FotoSorterCli.csproj", "{E1525A01-BBD3-45DE-A259-377099836F37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{14711F94-2704-4C4A-9185-1932FDA0BA69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14711F94-2704-4C4A-9185-1932FDA0BA69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14711F94-2704-4C4A-9185-1932FDA0BA69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1525A01-BBD3-45DE-A259-377099836F37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1525A01-BBD3-45DE-A259-377099836F37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1525A01-BBD3-45DE-A259-377099836F37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1525A01-BBD3-45DE-A259-377099836F37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
