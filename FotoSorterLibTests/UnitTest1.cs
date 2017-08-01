@@ -38,14 +38,6 @@ namespace FotoSorterLib.Tests
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod()]
-        public void getFilesInFolderTest()
-        {
-            string folder = "..\\..\\TestPhotos\\";
-            var expected = new List<string>() { "zeroDate.jpg", "NoDate.jpg", "NormalDate-2007.10.09.jpg" };
-            var actual = FotoAnalyser.GetFilesInFolder(folder);
-            CollectionAssert.AreEqual(expected, actual);
-        }
     }
 }
 

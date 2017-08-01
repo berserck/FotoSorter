@@ -20,6 +20,6 @@
         </Grid>
         <Label FontWeight="Bold">Imagens encontradas:</Label>
         <ListBox Name="lbInFiles" DisplayMemberPath="FilenameIn" MinHeight="100" Margin="10"></ListBox>
-        <Button Width="100">Executar</Button>
+        <Button Width="100" Click="MoveFiles">Executar</Button>
     </StackPanel>
 </Window>

@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using FotoSorterLib;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,26 +24,19 @@ namespace FotoSorter
         public MainWindow()
         {
             InitializeComponent();
-            lbInFiles.ItemsSource = files;
-            updateInuputFolder(InputFolder);
-            
+            updateInuputFolder(InputFolder);            
         }
 
 
         private void updateInuputFolder(string newFolder)
         {
             files.Clear();
-            DirectoryInfo dirInfo = new DirectoryInfo(newFolder);
             try
             {
-                string supportedExtensions = "*.jpg,*.jpe,*.jpeg,*.wmf,*.avi,*.mov";
-                var info = dirInfo.EnumerateFiles("*.*", SearchOption.AllDirectories).
-                    Where(s => !String.IsNullOrEmpty(Path.GetExtension(s.Name)) && supportedExtensions.Contains(Path.GetExtension(s.Name).ToLower()) );
-                foreach (var item in info)
-                {
-                    files.Add(new MyFile() { FilenameIn = item.FullName });
-                }
-            }catch (System.UnauthorizedAccessException e)
+                files = FotoAnalyser.PrepareFiles(newFolder);
+                lbInFiles.ItemsSource = files;
+            }
+            catch (System.UnauthorizedAccessException e)
             {
                 System.Windows.MessageBox.Show("Erro: " + e.Message, "Error a procurar as fotos");
             }
@@ -60,12 +54,12 @@ namespace FotoSorter
                 }
             }
         }
+
+        private void MoveFiles(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
-    public class MyFile
-    {
-        public string FilenameIn { get; set; }
-        public string FilenameOut { get; set; }
-        public DateTime? CaptureDate { get; set; }
-    }
+
 
 }
