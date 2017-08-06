@@ -48,7 +48,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="FotoSorterLibTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +61,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="TestFiles\CopyFile1.bmp" />
+    <Content Include="TestFiles\File1.bmp" />
+    <Content Include="TestFiles\File2.bmp" />
     <Content Include="TestPhotos\NoDate.jpg" />
     <Content Include="TestPhotos\NormalDate-2007.10.09.jpg" />
     <Content Include="TestPhotos\zeroDate.jpg" />

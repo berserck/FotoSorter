@@ -33,7 +33,7 @@ namespace FotoSorter
             files.Clear();
             try
             {
-                files = FotoAnalyser.PrepareFiles(newFolder);
+                files = FotoSorterLib.FotoSorterLib.PrepareFiles(newFolder);
                 lbInFiles.ItemsSource = files;
             }
             catch (System.UnauthorizedAccessException e)
