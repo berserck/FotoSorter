@@ -27,26 +27,20 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_751DB3078576D03D0CFDD6B39E1BFCD1"
-        "OwnerKey" = "8:_754808FAE51F35F7B9BC889B55A8B987"
+        "MsmKey" = "8:_26061E0D2699959D134A4BEBDD548DB7"
+        "OwnerKey" = "8:_F9FC2C86341C8FE64F5A57B2CECFBC2D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_751DB3078576D03D0CFDD6B39E1BFCD1"
-        "OwnerKey" = "8:_26061E0D2699959D134A4BEBDD548DB7"
+        "MsmKey" = "8:_4EFF4134E3414D98B5407084B9E5DB37"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_751DB3078576D03D0CFDD6B39E1BFCD1"
         "OwnerKey" = "8:_89A1A4638F304603B90BD85DE5E80FEB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_754808FAE51F35F7B9BC889B55A8B987"
-        "OwnerKey" = "8:_F9FC2C86341C8FE64F5A57B2CECFBC2D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -77,6 +71,18 @@
         {
         "MsmKey" = "8:_E08571A6193CDE9B7DCFFC695EF50ACE"
         "OwnerKey" = "8:_048EA9134172442093D10D80A8262AF5"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E08571A6193CDE9B7DCFFC695EF50ACE"
+        "OwnerKey" = "8:_754808FAE51F35F7B9BC889B55A8B987"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E08571A6193CDE9B7DCFFC695EF50ACE"
+        "OwnerKey" = "8:_26061E0D2699959D134A4BEBDD548DB7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -225,6 +231,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4EFF4134E3414D98B5407084B9E5DB37"
+            {
+            "SourcePath" = "8:..\\FotoSorter\\logo.ico"
+            "TargetName" = "8:logo.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_7E655C73834E418B87F9DCDB94386CBC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_751DB3078576D03D0CFDD6B39E1BFCD1"
@@ -439,7 +465,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:FotoSorterInstaller"
         "ProductCode" = "8:{21A983C4-7343-4492-82C3-67A732E23FCF}"
-        "PackageCode" = "8:{920D8B40-6F43-46E0-BDC4-60D343CAFD8B}"
+        "PackageCode" = "8:{2226E5A1-5A54-4370-A187-3FAD7E935FC9}"
         "UpgradeCode" = "8:{3B6D52DF-AC8C-41F6-8079-B32E01597C39}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -561,7 +587,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_1FEC8F9DDD83462F9B2D0314B3C58750"
             {
-            "Name" = "8:FotoSorter (Active)"
+            "Name" = "8:FotoSorter"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -570,7 +596,7 @@
             "Target" = "8:_89A1A4638F304603B90BD85DE5E80FEB"
             "Folder" = "8:_D7126808D3504A97B44D5CCBA17E798A"
             "WorkingFolder" = "8:_7E655C73834E418B87F9DCDB94386CBC"
-            "Icon" = "8:"
+            "Icon" = "8:_4EFF4134E3414D98B5407084B9E5DB37"
             "Feature" = "8:"
             }
         }
