@@ -107,8 +107,8 @@ namespace FotoSorterLib
                 var destFolder = Path.Combine(destFolderBase, GetTimeFolder(item.CaptureDate));
                 // calculate the outfilename
                 var outFilename = item.CaptureDate?.ToString(dateFormat) + "_"
-                    + (String.IsNullOrEmpty(fileName) ? item.FileOutName : fileName)
-                    ;
+                    + (String.IsNullOrEmpty(fileName) ? item.FileOutName : fileName) 
+                    + item.FileOutExtension;
                 string result = SimpleFileCopy(item.FilenameIn, outFilename, destFolder);
                 processed.Add(Tuple.Create(item.FilenameIn, result));
             }
