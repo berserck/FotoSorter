@@ -10,6 +10,8 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Forms;
 using System.Configuration;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace FotoSorter
 {
@@ -20,19 +22,20 @@ namespace FotoSorter
     public partial class MainWindow : Window
     {
         private ObservableCollection<MyFile> files = new ObservableCollection<MyFile>();
-        private string InputFolder = ConfigurationManager.AppSettings["sourceFolder"];
-        private string _outputFolder = ConfigurationManager.AppSettings["destinationFolder"];
+        private string sourceFolder = String.Empty;
+        private string destinationFolder = ConfigurationManager.AppSettings["destinationFolder"];
 
-        public string OutputFolder { get => _outputFolder; set => _outputFolder = value; }
 
         public MainWindow()
         {
             InitializeComponent();
-            updateInuputFolder(InputFolder);            
+            this.DataContext = this;
+            lblInFolder.Text = sourceFolder;
+            lblOutFolder.Text = destinationFolder;
         }
 
 
-        private void updateInuputFolder(string newFolder)
+        private void UpdateInuputFolder(string newFolder)
         {
             files.Clear();
             try
@@ -58,15 +61,15 @@ namespace FotoSorter
                 {
                     if (source.Name == "btnSource")
                     {
-                        updateInuputFolder(dialog.SelectedPath);
-
+                        UpdateInuputFolder(dialog.SelectedPath);
                     }
                     if (source.Name == "btnDest")
                     {
-                        OutputFolder = dialog.SelectedPath;
+                        destinationFolder = dialog.SelectedPath;
                         lblOutFolder.Text = dialog.SelectedPath;
                     }
                 }
+                SetExecuteButtonStatus();
             }
         }
 
@@ -74,5 +77,13 @@ namespace FotoSorter
         {
 
         }
+
+        private void SetExecuteButtonStatus()
+        {
+            btnDoSort.IsEnabled = (files.Count > 0) && !String.IsNullOrEmpty(destinationFolder);
+        }
+
+
     }
+}
 

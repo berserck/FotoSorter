@@ -7,7 +7,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="FotoSorter" Height="800" Width="700">
-
+    
     <StackPanel Margin="15">
         <Label FontWeight="Bold"> Directorio de Origem:</Label>
         <Grid >
@@ -15,7 +15,8 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="150" />
             </Grid.ColumnDefinitions>
-            <TextBox Name="lblInFolder" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}"></TextBox>
+            <TextBox Name="lblInFolder"
+                     Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}"></TextBox>
             <Button Name="btnSource" Grid.Column="1" Click="Button_Click">Onde estao as fotos</Button>
         </Grid>
         <Label FontWeight="Bold">Imagens encontradas:</Label>
@@ -27,11 +28,28 @@
                 <ColumnDefinition Width="150" />
             </Grid.ColumnDefinitions>
             <TextBox Name="lblOutFolder" 
-                     Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}"
-                     Text="{Binding OutputFolder}"></TextBox>
+                     Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}"></TextBox>
             <Button Name="btnDest" Grid.Column="1" Click="Button_Click" >Escolher Destino</Button>
         </Grid>
-        <Button 
-            Width="100" Click="MoveFiles">Executar</Button>
+        <Button Name="btnDoSort"
+            Width="100" Click="MoveFiles" Margin="15" Padding="5"
+            IsEnabled="False"
+            >Executar</Button>
+        
+        
+        <DataGrid AutoGenerateColumns="False" RowHeaderWidth="0">
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Height" Value="35" />
+                    <Setter Property="Padding" Value="5" />
+                    <Setter Property="Background" Value="#4E87D4" />
+                    <Setter Property="Foreground" Value="White" />
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="File" Width="500" />
+                <DataGridTextColumn Header="Result" />
+            </DataGrid.Columns>
+        </DataGrid>
     </StackPanel>
 </Window>
