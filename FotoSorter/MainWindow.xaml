@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         Title="FotoSorter" Height="800" Width="700">
     
+    
     <StackPanel Margin="15">
         <Label FontWeight="Bold"> Directorio de Origem:</Label>
         <Grid >

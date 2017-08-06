@@ -75,7 +75,13 @@ namespace FotoSorter
 
         private void MoveFiles(object sender, RoutedEventArgs e)
         {
+            var result = FotoSorterLib.FotoSorterLib.CopyFiles(files, destinationFolder, "yyyy.MM.dd", String.Empty);
 
+            string message = String.Format(
+                @"Processo concluido.
+{0} Fotos copiadas.
+{1} fotos repetidas.", result.Count(t => t.Item2 == "OK"), result.Count(t => t.Item2 == "O mesmo ficheiro já existe."));
+            System.Windows.MessageBox.Show(message);
         }
 
         private void SetExecuteButtonStatus()
