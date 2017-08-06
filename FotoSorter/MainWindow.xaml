@@ -16,10 +16,22 @@
                 <ColumnDefinition Width="150" />
             </Grid.ColumnDefinitions>
             <TextBox Name="lblInFolder" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}"></TextBox>
-            <Button Grid.Column="1" Click="Button_Click">Onde estao as fotos</Button>
+            <Button Name="btnSource" Grid.Column="1" Click="Button_Click">Onde estao as fotos</Button>
         </Grid>
         <Label FontWeight="Bold">Imagens encontradas:</Label>
         <ListBox Name="lbInFiles" DisplayMemberPath="FilenameIn" MinHeight="100" Margin="10"></ListBox>
-        <Button Width="100" Click="MoveFiles">Executar</Button>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="150" />
+            </Grid.ColumnDefinitions>
+            <TextBox Name="lblOutFolder" 
+                     Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}"
+                     Text="{Binding OutputFolder}"></TextBox>
+            <Button Name="btnDest" Grid.Column="1" Click="Button_Click" >Escolher Destino</Button>
+        </Grid>
+        <Button 
+            Width="100" Click="MoveFiles">Executar</Button>
     </StackPanel>
 </Window>

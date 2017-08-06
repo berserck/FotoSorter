@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace FotoSorter
 {
@@ -19,7 +20,10 @@ namespace FotoSorter
     public partial class MainWindow : Window
     {
         private ObservableCollection<MyFile> files = new ObservableCollection<MyFile>();
-        private string InputFolder = "C:\\Users\\pgp\\Documents\\Visual Studio 2017\\Projects\\FotoSorter\\FotoSorterLibTests\\TestPhotos\\";
+        private string InputFolder = ConfigurationManager.AppSettings["sourceFolder"];
+        private string _outputFolder = ConfigurationManager.AppSettings["destinationFolder"];
+
+        public string OutputFolder { get => _outputFolder; set => _outputFolder = value; }
 
         public MainWindow()
         {
@@ -47,10 +51,21 @@ namespace FotoSorter
         {
             using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
             {
+                var source = sender as System.Windows.Controls.Button;
+
                 System.Windows.Forms.DialogResult result = dialog.ShowDialog();
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
-                    updateInuputFolder(dialog.SelectedPath);
+                    if (source.Name == "btnSource")
+                    {
+                        updateInuputFolder(dialog.SelectedPath);
+
+                    }
+                    if (source.Name == "btnDest")
+                    {
+                        OutputFolder = dialog.SelectedPath;
+                        lblOutFolder.Text = dialog.SelectedPath;
+                    }
                 }
             }
         }
@@ -61,5 +76,3 @@ namespace FotoSorter
         }
     }
 
-
-}
