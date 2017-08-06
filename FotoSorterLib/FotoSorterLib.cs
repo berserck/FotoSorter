@@ -26,7 +26,7 @@ namespace FotoSorterLib
             var subIfdDirectory = directories.OfType<ExifSubIfdDirectory>().FirstOrDefault();
             if (subIfdDirectory != null)
             {
-                dateTime = subIfdDirectory?.GetDescription(ExifDirectoryBase.TagDateTimeOriginal);
+                dateTime = subIfdDirectory?.GetDescription(ExifDirectoryBase.TagDateTimeOriginal) ?? DateTime.MinValue.ToString("yyyy:MM:dd HH:mm:ss");
 
                 // found pictures with date = "0000:00:00 00:00:00", this is before DateTime.MinValu, so I'm setting date to min value in this case
                 if (dateTime.Equals("0000:00:00 00:00:00"))
@@ -34,11 +34,7 @@ namespace FotoSorterLib
                     dateTime = DateTime.MinValue.ToString("yyyy:MM:dd HH:mm:ss");
                 }
             }
-            foreach (var directory in directories)
-                foreach (var tag in directory.Tags)
-                    Trace.WriteLine($"[{directory.Name}] - {tag.Name} = {tag.Description}");
-
-            Trace.WriteLine("\n\nTime is: " + dateTime + "\n\n");
+          
             return DateTime.ParseExact(dateTime, "yyyy:MM:dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
         }
 
@@ -69,6 +65,7 @@ namespace FotoSorterLib
                 Where(s => !String.IsNullOrEmpty(Path.GetExtension(s.Name)) && supportedExtensions.Contains(Path.GetExtension(s.Name).ToLower()));
             foreach (var item in info)
             {
+                Trace.WriteLine($"Processing file {item.FullName}");
                 var filenameIn = item.FullName;
                 var date = GetPhotoDate(filenameIn);
                 var captureDate = GetPhotoDate(filenameIn);
