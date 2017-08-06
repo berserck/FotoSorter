@@ -20,8 +20,9 @@
                      Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}"></TextBox>
             <Button Name="btnSource" Grid.Column="1" Click="Button_Click">Onde estao as fotos</Button>
         </Grid>
+        
         <Label FontWeight="Bold">Imagens encontradas:</Label>
-        <ListBox Name="lbInFiles" DisplayMemberPath="FilenameIn" MinHeight="100" Margin="10"></ListBox>
+        <ListBox Name="lbInFiles" DisplayMemberPath="FilenameIn" MinHeight="100" Margin="10" MaxHeight="300"></ListBox>
 
         <Grid>
             <Grid.ColumnDefinitions>
