@@ -22,16 +22,13 @@ namespace FotoSorter
     public partial class MainWindow : Window
     {
         private ObservableCollection<MyFile> files = new ObservableCollection<MyFile>();
-        private string sourceFolder = String.Empty;
-        private string destinationFolder = ConfigurationManager.AppSettings["destinationFolder"];
-
 
         public MainWindow()
         {
             InitializeComponent();
             this.DataContext = this;
-            lblInFolder.Text = sourceFolder;
-            lblOutFolder.Text = destinationFolder;
+            lblInFolder.Text = String.Empty;
+            lblOutFolder.Text = ConfigurationManager.AppSettings["destinationFolder"];
         }
 
 
@@ -65,7 +62,6 @@ namespace FotoSorter
                     }
                     if (source.Name == "btnDest")
                     {
-                        destinationFolder = dialog.SelectedPath;
                         lblOutFolder.Text = dialog.SelectedPath;
                     }
                 }
@@ -75,7 +71,7 @@ namespace FotoSorter
 
         private void MoveFiles(object sender, RoutedEventArgs e)
         {
-            var result = FotoSorterLib.FotoSorterLib.CopyFiles(files, destinationFolder, "yyyy.MM.dd", String.Empty);
+            var result = FotoSorterLib.FotoSorterLib.CopyFiles(files, lblOutFolder.Text, "yyyy.MM.dd", String.Empty);
             btnDoSort.IsEnabled = false;
             string message = String.Format(
                 @"Processo concluido.
@@ -86,7 +82,7 @@ namespace FotoSorter
 
         private void SetExecuteButtonStatus()
         {
-            btnDoSort.IsEnabled = (files.Count > 0) && !String.IsNullOrEmpty(destinationFolder);
+            btnDoSort.IsEnabled = (files.Count > 0) && !String.IsNullOrEmpty(lblOutFolder.Text);
         }
 
 
