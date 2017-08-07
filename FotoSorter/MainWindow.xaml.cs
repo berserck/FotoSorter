@@ -84,6 +84,9 @@ namespace FotoSorter
 {0} Fotos copiadas.
 {1} fotos repetidas.", result.Count(t => t.Item2 == "OK"), result.Count(t => t.Item2 == "O mesmo ficheiro já existe."));
             Log.Information(message);
+
+            gridResult.ItemsSource = result;
+
             System.Windows.MessageBox.Show(message);
         }
 

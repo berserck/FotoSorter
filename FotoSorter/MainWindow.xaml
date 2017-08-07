@@ -39,7 +39,7 @@
             >Executar</Button>
         
         
-        <DataGrid AutoGenerateColumns="False" RowHeaderWidth="0">
+        <DataGrid AutoGenerateColumns="False" RowHeaderWidth="0" MaxHeight="300"  Name="gridResult">
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Height" Value="35" />
@@ -49,8 +49,8 @@
                 </Style>
             </DataGrid.ColumnHeaderStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="File" Width="500" />
-                <DataGridTextColumn Header="Result" />
+                <DataGridTextColumn Header="File" Width="500" Binding="{Binding Item1}" />
+                <DataGridTextColumn Header="Result" Binding="{Binding Item2}" />
             </DataGrid.Columns>
         </DataGrid>
     </StackPanel>
