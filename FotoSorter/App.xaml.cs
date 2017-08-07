@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Serilog;
+
 
 namespace FotoSorter
 {
@@ -16,12 +18,13 @@ namespace FotoSorter
         private void Application_Startup(object sender, StartupEventArgs e)
         {
 
+            Log.Logger = new LoggerConfiguration()
+               .MinimumLevel.Debug()
+               .WriteTo.LiterateConsole()
+               .WriteTo.RollingFile("logs\\myapp-{Date}.txt")
+               .CreateLogger();
 
-            //if (e.Args.Length == 2)
-            //{
-            //    Resources["strDefInput"] = e.Args[0];
-            //    Resources["strDefOutput"] = e.Args[1];
-            //}
+            Log.Information("Starting FotoSorter!");
 
         }
     }

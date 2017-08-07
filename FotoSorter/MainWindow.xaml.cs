@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Configuration;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Serilog;
 
 namespace FotoSorter
 {
@@ -29,20 +30,24 @@ namespace FotoSorter
             this.DataContext = this;
             lblInFolder.Text = String.Empty;
             lblOutFolder.Text = ConfigurationManager.AppSettings["destinationFolder"];
+            Log.Information("Starting finish initializing main window!");
         }
 
 
         private void UpdateInuputFolder(string newFolder)
         {
+            Log.Information("Starting UpdateInuputFolder");
             files.Clear();
             try
             {
                 files = FotoSorterLib.FotoSorterLib.PrepareFiles(newFolder);
                 lbInFiles.ItemsSource = files;
+                Log.Information("Files Found {@files}", files);
             }
             catch (System.UnauthorizedAccessException e)
             {
                 System.Windows.MessageBox.Show("Erro: " + e.Message, "Error a procurar as fotos");
+                Log.Error(e.Message);
             }
             lblInFolder.Text = newFolder;
         }
@@ -72,11 +77,13 @@ namespace FotoSorter
         private void MoveFiles(object sender, RoutedEventArgs e)
         {
             var result = FotoSorterLib.FotoSorterLib.CopyFiles(files, lblOutFolder.Text, "yyyy.MM.dd", String.Empty);
+            Log.Information("Processed files: {@files}", result);
             btnDoSort.IsEnabled = false;
             string message = String.Format(
                 @"Processo concluido.
 {0} Fotos copiadas.
 {1} fotos repetidas.", result.Count(t => t.Item2 == "OK"), result.Count(t => t.Item2 == "O mesmo ficheiro já existe."));
+            Log.Information(message);
             System.Windows.MessageBox.Show(message);
         }
 
