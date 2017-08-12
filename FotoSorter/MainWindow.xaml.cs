@@ -1,18 +1,10 @@
 ﻿using FotoSorterLib;
-using Microsoft.Win32;
+using Serilog;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
+using System.Configuration;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Forms;
-using System.Configuration;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using Serilog;
 
 namespace FotoSorter
 {
