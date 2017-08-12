@@ -74,7 +74,7 @@ namespace FotoSorter
             string message = String.Format(
                 @"Processo concluido.
 {0} Fotos copiadas.
-{1} fotos repetidas.", result.Count(t => t.Item2 == "OK"), result.Count(t => t.Item2 == "O mesmo ficheiro já existe."));
+{1} fotos repetidas.", result.Count(t => t.Status == CopyResult.Sucess), result.Count(t => t.Status == CopyResult.SameFileFound));
             Log.Information(message);
 
             gridResult.ItemsSource = result;

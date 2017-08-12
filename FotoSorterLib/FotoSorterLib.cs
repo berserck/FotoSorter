@@ -103,9 +103,9 @@ namespace FotoSorterLib
         /// <param name="dateFormat"></param>
         /// <param name="fileName">Base filename to write</param>
         /// <returns></returns>
-        static public ObservableCollection<Tuple<string,string,string>> CopyFiles(ObservableCollection<MyFile> files, string destFolderBase, string dateFormat, string fileName)
+        static public ObservableCollection<CopyResults> CopyFiles(ObservableCollection<MyFile> files, string destFolderBase, string dateFormat, string fileName)
         {
-            var processed = new ObservableCollection<Tuple<string, string,string>>();
+            var processed = new ObservableCollection<CopyResults>();
             // loop over the files
             foreach (var item in files)
             {
@@ -114,8 +114,15 @@ namespace FotoSorterLib
                 var outFilename = item.CaptureDate?.ToString(dateFormat) + "_"
                     + (String.IsNullOrEmpty(fileName) ? item.FileOutName : fileName) 
                     + item.FileOutExtension;
-                string result = SimpleFileCopy(item.FilenameIn, outFilename, destFolder);
-                processed.Add(Tuple.Create(item.FilenameIn, destFolder, result));
+                var result = SimpleFileCopy(item.FilenameIn, outFilename, destFolder);
+                processed.Add(new CopyResults()
+                {
+                    FilenameOrigin = item.FilenameIn,
+                    DestinationFolder = destFolder,
+                    Message = result.Item2,
+                    Status = result.Item1
+                });
+                //processed.Add(Tuple.Create(item.FilenameIn, destFolder, result));
             }
             return processed;
         }
@@ -128,7 +135,7 @@ namespace FotoSorterLib
         /// <param name="targetFileName"></param>
         /// <param name="targetPath"></param>
         /// <returns></returns>
-        static public string SimpleFileCopy(string sourceFile, string targetFileName, string targetPath)
+        static public Tuple<CopyResult, string> SimpleFileCopy(string sourceFile, string targetFileName, string targetPath)
         {
             string destFile = System.IO.Path.Combine(targetPath, targetFileName);
 
@@ -148,7 +155,7 @@ namespace FotoSorterLib
                 // test if the file is the same
                 if (FilesAreEqual(sourceFile, destFile))
                 {
-                    return "O mesmo ficheiro já existe.";
+                    return  Tuple.Create(CopyResult.SameFileFound, "O mesmo ficheiro já existe.");
                 }
 
                 string tempFileName = string.Format("{0}_{1}", fileNameOnly, count++);
@@ -159,9 +166,9 @@ namespace FotoSorterLib
                 System.IO.File.Copy(sourceFile, destFile);
             } catch (System.Exception e)
             {
-                return "Erro: " + e.Message;
+                return Tuple.Create(CopyResult.Error, "Erro: " + e.Message);
             }
-            return "OK";
+            return Tuple.Create(CopyResult.Sucess, "OK");
         }
 
 
@@ -202,13 +209,26 @@ namespace FotoSorterLib
             return true;
         }
 
-
     }
+
+    public enum CopyResult
+    {
+        Sucess, SameFileFound, Error
+    };
+
     public class MyFile
     {
         public string FilenameIn { get; set; }
         public string FileOutName { get; set; }
         public string FileOutExtension { get; set; }
         public DateTime? CaptureDate { get; set; }
+    }
+
+    public class CopyResults
+    {
+        public string FilenameOrigin { get; set; }
+        public string DestinationFolder { get; set; }
+        public string Message { get; set; }
+        public CopyResult Status { get; set; }
     }
 }

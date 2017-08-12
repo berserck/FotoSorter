@@ -37,9 +37,11 @@
             Width="100" Click="MoveFiles" Margin="15" Padding="5"
             IsEnabled="False"
             >Executar</Button>
-        
-        
-        <DataGrid AutoGenerateColumns="False" RowHeaderWidth="0" MaxHeight="300"  Name="gridResult">
+
+
+        <DataGrid Name="gridResult" AutoGenerateColumns="False" 
+                  RowHeaderWidth="0" MaxHeight="300" 
+                 >
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Height" Value="35" />
@@ -49,9 +51,9 @@
                 </Style>
             </DataGrid.ColumnHeaderStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="File" Width="300" Binding="{Binding Item1}" />
-                <DataGridTextColumn Header="Destination" Width="200" Binding="{Binding Item2}" />
-                <DataGridTextColumn Header="Result" Binding="{Binding Item3}" />
+                <DataGridTextColumn Header="File" Width="300" Binding="{Binding FilenameOrigin}" />
+                <DataGridTextColumn Header="Destination" Width="200" Binding="{Binding DestinationFolder}" />
+                <DataGridTextColumn Header="Result" Binding="{Binding Message}" />
             </DataGrid.Columns>
         </DataGrid>
     </StackPanel>
