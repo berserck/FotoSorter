@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Collections.ObjectModel;
 
+
 namespace FotoSorterLib
 {
     /// <summary>
@@ -17,13 +18,20 @@ namespace FotoSorterLib
     /// </summary>
     public static class FotoSorterLib
     {
+
         static public DateTime GetPhotoDate(string filename)
         {
             var dateTime = DateTime.MinValue.ToString("yyyy:MM:dd HH:mm:ss");
             // open image
-            IEnumerable<MetadataExtractor.Directory> directories = ImageMetadataReader.ReadMetadata(filename);
+            IEnumerable<MetadataExtractor.Directory> directories = null;
+            try
+            {
+                directories = ImageMetadataReader.ReadMetadata(filename);
+            } catch(MetadataExtractor.ImageProcessingException e)
+            {
 
-            var subIfdDirectory = directories.OfType<ExifSubIfdDirectory>().FirstOrDefault();
+            }
+            var subIfdDirectory = directories?.OfType<ExifSubIfdDirectory>().FirstOrDefault();
             if (subIfdDirectory != null)
             {
                 dateTime = subIfdDirectory?.GetDescription(ExifDirectoryBase.TagDateTimeOriginal) ?? DateTime.MinValue.ToString("yyyy:MM:dd HH:mm:ss");
@@ -95,9 +103,9 @@ namespace FotoSorterLib
         /// <param name="dateFormat"></param>
         /// <param name="fileName">Base filename to write</param>
         /// <returns></returns>
-        static public ObservableCollection<Tuple<string,string>> CopyFiles(ObservableCollection<MyFile> files, string destFolderBase, string dateFormat, string fileName)
+        static public ObservableCollection<Tuple<string,string,string>> CopyFiles(ObservableCollection<MyFile> files, string destFolderBase, string dateFormat, string fileName)
         {
-            var processed = new ObservableCollection<Tuple<string, string>>();
+            var processed = new ObservableCollection<Tuple<string, string,string>>();
             // loop over the files
             foreach (var item in files)
             {
@@ -107,7 +115,7 @@ namespace FotoSorterLib
                     + (String.IsNullOrEmpty(fileName) ? item.FileOutName : fileName) 
                     + item.FileOutExtension;
                 string result = SimpleFileCopy(item.FilenameIn, outFilename, destFolder);
-                processed.Add(Tuple.Create(item.FilenameIn, result));
+                processed.Add(Tuple.Create(item.FilenameIn, destFolder, result));
             }
             return processed;
         }
