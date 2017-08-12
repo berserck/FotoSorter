@@ -49,8 +49,9 @@
                 </Style>
             </DataGrid.ColumnHeaderStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="File" Width="500" Binding="{Binding Item1}" />
-                <DataGridTextColumn Header="Result" Binding="{Binding Item2}" />
+                <DataGridTextColumn Header="File" Width="300" Binding="{Binding Item1}" />
+                <DataGridTextColumn Header="Destination" Width="200" Binding="{Binding Item2}" />
+                <DataGridTextColumn Header="Result" Binding="{Binding Item3}" />
             </DataGrid.Columns>
         </DataGrid>
     </StackPanel>
