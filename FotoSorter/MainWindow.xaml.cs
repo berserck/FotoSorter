@@ -50,6 +50,12 @@ namespace FotoSorter
             {
                 var source = sender as System.Windows.Controls.Button;
 
+                var startFolderPath = getFolderPath(source.Name);
+
+                if (! String.IsNullOrEmpty(startFolderPath))
+                {
+                    dialog.SelectedPath = startFolderPath;
+                }
                 System.Windows.Forms.DialogResult result = dialog.ShowDialog();
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
@@ -63,6 +69,17 @@ namespace FotoSorter
                     }
                 }
                 SetExecuteButtonStatus();
+            }
+        }
+
+        private string getFolderPath(string name)
+        {
+            if (name == "btnSource")
+            {
+                return lblInFolder.Text;
+            } else
+            {
+                return lblOutFolder.Text;
             }
         }
 
