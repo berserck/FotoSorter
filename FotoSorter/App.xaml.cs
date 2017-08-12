@@ -21,7 +21,7 @@ namespace FotoSorter
             Log.Logger = new LoggerConfiguration()
                .MinimumLevel.Debug()
                .WriteTo.LiterateConsole()
-               .WriteTo.RollingFile("logs\\myapp-{Date}.txt")
+               .WriteTo.RollingFile("c:\\temp\\logs\\FotoSorter-{Date}.txt")
                .CreateLogger();
 
             Log.Information("Starting FotoSorter!");
