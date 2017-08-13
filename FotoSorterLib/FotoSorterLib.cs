@@ -99,17 +99,17 @@ namespace FotoSorterLib
         /// <destFolderBase>/<year>/<month>/<date in dateformat>_<original name or fileName if given>_<counter if destination file exists>.<extension>
         /// </summary>
         /// <param name="files">List of files found</param>
-        /// <param name="destFolderBase"></param>
-        /// <param name="dateFormat"></param>
+        /// <param name="destFolderBase">Starting folder were the year/month folders are created</param>
+        /// <param name="dateFormat"> String used to format the Time in the filename</param>
         /// <param name="fileName">Base filename to write</param>
         /// <returns></returns>
-        static public ObservableCollection<CopyResults> CopyFiles(ObservableCollection<MyFile> files, string destFolderBase, string dateFormat, string fileName)
+        static public ObservableCollection<CopyResults> CopyFiles(ObservableCollection<MyFile> files, string destFolderBase, string dateFormat, string fileName, string eventName="")
         {
             var processed = new ObservableCollection<CopyResults>();
             // loop over the files
             foreach (var item in files)
             {
-                var destFolder = Path.Combine(destFolderBase, GetTimeFolder(item.CaptureDate));
+                var destFolder = Path.Combine(destFolderBase, GetTimeFolder(item.CaptureDate), eventName);
                 // calculate the outfilename
                 var outFilename = item.CaptureDate?.ToString(dateFormat) + "_"
                     + (String.IsNullOrEmpty(fileName) ? item.FileOutName : fileName) 
