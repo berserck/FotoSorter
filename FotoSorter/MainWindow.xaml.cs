@@ -87,7 +87,7 @@ namespace FotoSorter
 
         private void MoveFiles(object sender, RoutedEventArgs e)
         {
-            var result = FotoSorterLib.FotoSorterLib.CopyFiles(files, lblOutFolder.Text, "yyyy.MM.dd", String.Empty);
+            var result = FotoSorterLib.FotoSorterLib.CopyFiles(files, lblOutFolder.Text, "yyyy.MM.dd", String.Empty, txtEvent.Text);
             Log.Information("Processed files: {@files}", result);
             btnDoSort.IsEnabled = false;
             string message = String.Format(
