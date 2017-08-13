@@ -43,6 +43,7 @@ namespace FotoSorter
                 Log.Error(e.Message);
             }
             lblInFolder.Text = newFolder;
+            SetExecuteButtonStatus();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -67,9 +68,9 @@ namespace FotoSorter
                     if (source.Name == "btnDest")
                     {
                         lblOutFolder.Text = dialog.SelectedPath;
+                        SetExecuteButtonStatus();
                     }
                 }
-                SetExecuteButtonStatus();
             }
         }
 
@@ -149,7 +150,6 @@ namespace FotoSorter
             }
             e.Handled = true;
         }
-
 
         private void lblInFolder_PreviewDragLeave(object sender, DragEventArgs e)
         {
