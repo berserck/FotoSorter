@@ -103,29 +103,29 @@ namespace FotoSorterLib
         /// <param name="dateFormat"> String used to format the Time in the filename</param>
         /// <param name="fileName">Base filename to write</param>
         /// <returns></returns>
-        static public ObservableCollection<CopyResults> CopyFiles(ObservableCollection<MyFile> files, string destFolderBase, string dateFormat, string fileName, string eventName="")
-        {
-            var processed = new ObservableCollection<CopyResults>();
-            // loop over the files
-            foreach (var item in files)
-            {
-                var destFolder = Path.Combine(destFolderBase, GetTimeFolder(item.CaptureDate), eventName);
-                // calculate the outfilename
-                var outFilename = item.CaptureDate?.ToString(dateFormat) + "_"
-                    + (String.IsNullOrEmpty(fileName) ? item.FileOutName : fileName) 
-                    + item.FileOutExtension;
-                var result = SimpleFileCopy(item.FilenameIn, outFilename, destFolder);
-                processed.Add(new CopyResults()
-                {
-                    FilenameOrigin = item.FilenameIn,
-                    DestinationFolder = destFolder,
-                    Message = result.Item2,
-                    Status = result.Item1
-                });
-                //processed.Add(Tuple.Create(item.FilenameIn, destFolder, result));
-            }
-            return processed;
-        }
+        //static public ObservableCollection<CopyResults> CopyFiles(ObservableCollection<MyFile> files, string destFolderBase, string dateFormat, string fileName, string eventName="")
+        //{
+        //    var processed = new ObservableCollection<CopyResults>();
+        //    // loop over the files
+        //    foreach (var item in files)
+        //    {
+        //        var destFolder = Path.Combine(destFolderBase, GetTimeFolder(item.CaptureDate), eventName);
+        //        // calculate the outfilename
+        //        var outFilename = item.CaptureDate?.ToString(dateFormat) + "_"
+        //            + (String.IsNullOrEmpty(fileName) ? item.FileOutName : fileName) 
+        //            + item.FileOutExtension;
+        //        var result = SimpleFileCopy(item.FilenameIn, outFilename, destFolder);
+        //        processed.Add(new CopyResults()
+        //        {
+        //            FilenameOrigin = item.FilenameIn,
+        //            DestinationFolder = destFolder,
+        //            Message = result.Item2,
+        //            Status = result.Item1
+        //        });
+        //        //processed.Add(Tuple.Create(item.FilenameIn, destFolder, result));
+        //    }
+        //    return processed;
+        //}
 
         /// <summary>
         /// code mix of https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/file-system/how-to-copy-delete-and-move-files-and-folders

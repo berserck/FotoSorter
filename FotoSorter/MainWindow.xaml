@@ -7,10 +7,10 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="FotoSorter" Height="800" Width="700">
-    
-    
+
+
     <StackPanel Margin="15">
-        <Label FontWeight="Bold"> Directorio de Origem:</Label>
+        <Label FontWeight="Bold">Directorio de Origem:</Label>
         <Grid >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -28,7 +28,7 @@
                      ></TextBox>
             <Button Name="btnSource" Grid.Column="1" Click="Button_Click">Onde estao as fotos</Button>
         </Grid>
-        
+
         <Label FontWeight="Bold">Imagens encontradas:</Label>
         <ListBox Name="lbInFiles" DisplayMemberPath="FilenameIn" MinHeight="100" Margin="10" MaxHeight="300"></ListBox>
 
@@ -46,13 +46,13 @@
                 <ColumnDefinition Width="150" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-        <Label Grid.Column="0" HorizontalContentAlignment="Center">Evento: </Label>
-        <TextBox Grid.Column="1" Name="txtEvent"
+            <Label Grid.Column="0" HorizontalContentAlignment="Center">Evento:</Label>
+            <TextBox Grid.Column="1" Name="txtEvent"
                  Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}"></TextBox>
         </Grid>
 
         <Button Name="btnDoSort"
-            Width="100" Click="MoveFiles" Margin="15" Padding="5"
+            Width="100" Click="ExecuteButtonClick" Margin="15" Padding="5"
             IsEnabled="False"
             >Executar</Button>
 
@@ -74,5 +74,10 @@
                 <DataGridTextColumn Header="Result" Binding="{Binding Message}" />
             </DataGrid.Columns>
         </DataGrid>
+        <Grid Margin="20">
+            <ProgressBar Minimum="0" Maximum="100" Name="copyStatus" />
+            <TextBlock Text="{Binding ElementName=copyStatus, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Grid>
     </StackPanel>
+
 </Window>
