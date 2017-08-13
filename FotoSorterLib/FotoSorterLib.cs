@@ -171,6 +171,24 @@ namespace FotoSorterLib
             return Tuple.Create(CopyResult.Sucess, "OK");
         }
 
+        /// <summary>
+        /// Function that will return the path, from a full path with or without a filename in the end
+        /// </summary>
+        /// <param name="fullPath"></param>
+        /// <returns></returns>
+        static public string GetPath(string fullPath)
+        {
+            bool isFolder = File.GetAttributes(fullPath).HasFlag(FileAttributes.Directory);
+            if (!isFolder)
+            {
+                return new FileInfo(fullPath).Directory.FullName;
+
+            } else
+            {
+                return fullPath;
+
+            }
+        }
 
 
         /// <summary>

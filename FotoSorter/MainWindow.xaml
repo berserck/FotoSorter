@@ -17,7 +17,15 @@
                 <ColumnDefinition Width="150" />
             </Grid.ColumnDefinitions>
             <TextBox Name="lblInFolder"
-                     Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}"></TextBox>
+                     Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}"
+                     AllowDrop="True"
+                     PreviewDragEnter="lblInFolder_PreviewDragEnter"
+                     PreviewDragOver="lblInFolder_DragOver"
+                     DragOver="lblInFolder_DragOver"
+                     Drop="lblInFolder_Drop"
+                     DragDrop.Drop="lblInFolder_Drop"
+                     PreviewDragLeave="lblInFolder_PreviewDragLeave"
+                     ></TextBox>
             <Button Name="btnSource" Grid.Column="1" Click="Button_Click">Onde estao as fotos</Button>
         </Grid>
         

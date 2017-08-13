@@ -15,6 +15,7 @@ namespace FotoSorter
     public partial class MainWindow : Window
     {
         private ObservableCollection<MyFile> files = new ObservableCollection<MyFile>();
+        private string _previousSourceFolder = null;
 
         public MainWindow()
         {
@@ -50,7 +51,7 @@ namespace FotoSorter
             {
                 var source = sender as System.Windows.Controls.Button;
 
-                var startFolderPath = getFolderPath(source.Name);
+                var startFolderPath = GetFolderPath(source.Name);
 
                 if (! String.IsNullOrEmpty(startFolderPath))
                 {
@@ -72,7 +73,7 @@ namespace FotoSorter
             }
         }
 
-        private string getFolderPath(string name)
+        private string GetFolderPath(string name)
         {
             if (name == "btnSource")
             {
@@ -104,6 +105,75 @@ namespace FotoSorter
             btnDoSort.IsEnabled = (files.Count > 0) && !String.IsNullOrEmpty(lblOutFolder.Text);
         }
 
+#region DragnDrop
+
+        private void lblInFolder_DragOver(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effects = DragDropEffects.Copy; // Okay
+                string[] fullPaths = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+                string fullPath = fullPaths[0];
+                var folder = FotoSorterLib.FotoSorterLib.GetPath(fullPath);
+                lblInFolder.Text = folder;
+            }
+            e.Handled = true;
+        }
+
+        private void lblInFolder_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effects = DragDropEffects.Copy; // Okay
+                string[] fullPaths = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+                string fullPath = fullPaths[0];
+                var folder = FotoSorterLib.FotoSorterLib.GetPath(fullPath);
+                Log.Information("File Drop: {@original} turned into {@folder}", fullPath, folder);
+                lblInFolder.Text = folder;
+                UpdateInuputFolder(folder);
+            }
+            e.Handled = true;
+        }
+
+        private void lblInFolder_PreviewDragOver(object sender, DragEventArgs e)
+        {
+            //base.OnPreviewDragOver(e);
+            _previousSourceFolder = lblInFolder.Text;
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effects = DragDropEffects.Copy; // Okay
+            }
+            else
+            {
+                e.Effects = DragDropEffects.None; // Unknown data, ignore it
+            }
+            e.Handled = true;
+        }
+
+
+        private void lblInFolder_PreviewDragLeave(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                lblInFolder.Text = _previousSourceFolder;
+            }
+            e.Handled = true;
+        }
+
+        private void lblInFolder_PreviewDragEnter(object sender, DragEventArgs e)
+        {
+            _previousSourceFolder = lblInFolder.Text;
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effects = DragDropEffects.Copy; // Okay
+            }
+            else
+            {
+                e.Effects = DragDropEffects.None; // Unknown data, ignore it
+            }
+            e.Handled = true;
+        }
+#endregion
 
     }
 }

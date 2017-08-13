@@ -101,6 +101,24 @@ namespace FotoSorterLib.Tests
             Assert.IsTrue(FotoSorterLib.FilesAreEqual(file1, file2));
         }
 
+        [TestMethod()]
+        public void GetPathTest_return_Path_if_file_is_not_present()
+        {
+            string expected = System.IO.Path.GetTempPath();
+            expected = expected.Remove(expected.LastIndexOf(System.IO.Path.DirectorySeparatorChar), 1);
+            string actual = FotoSorterLib.GetPath(expected);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod()]
+        public void GetPathTest_return_Path_if_file_is_present()
+        {
+            string filename = System.IO.Path.GetTempFileName();
+            string expected = System.IO.Path.GetTempPath();
+            expected = expected.Remove(expected.LastIndexOf(System.IO.Path.DirectorySeparatorChar), 1);
+            string actual = FotoSorterLib.GetPath(filename);
+            Assert.AreEqual(expected, actual);
+        }
 
     }
 }
