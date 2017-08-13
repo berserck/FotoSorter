@@ -54,7 +54,7 @@ namespace FotoSorter
 
                 var startFolderPath = GetFolderPath(source.Name);
 
-                if (! String.IsNullOrEmpty(startFolderPath))
+                if (!String.IsNullOrEmpty(startFolderPath))
                 {
                     dialog.SelectedPath = startFolderPath;
                 }
@@ -79,7 +79,8 @@ namespace FotoSorter
             if (name == "btnSource")
             {
                 return lblInFolder.Text;
-            } else
+            }
+            else
             {
                 return lblOutFolder.Text;
             }
@@ -106,7 +107,7 @@ namespace FotoSorter
             btnDoSort.IsEnabled = (files.Count > 0) && !String.IsNullOrEmpty(lblOutFolder.Text);
         }
 
-#region DragnDrop
+        #region DragnDrop
 
         private void lblInFolder_DragOver(object sender, DragEventArgs e)
         {
@@ -173,7 +174,9 @@ namespace FotoSorter
             }
             e.Handled = true;
         }
-#endregion
+        #endregion
+
+
 
     }
 }
