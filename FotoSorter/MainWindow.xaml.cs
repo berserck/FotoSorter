@@ -230,15 +230,9 @@ namespace FotoSorter
                     Message = result.Item2,
                     Status = result.Item1
                 });
-                e.Result = processed;
+                
             }
-
-            //for (int i = 0; i < 100; i++)
-            //{
-            //    (sender as BackgroundWorker).ReportProgress(i);
-            //    Thread.Sleep(100);
-            //}
-
+            e.Result = processed;
         }
 
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -268,19 +262,6 @@ namespace FotoSorter
 
             var arg = new CopyArguments() { Files = files, DestFolderBase = lblOutFolder.Text, DateFormat = "yyyy.MM.dd", FileName = String.Empty, EventName = txtEvent.Text };
             worker.RunWorkerAsync(arg);
-
-            //            var result = CopyFiles(files, lblOutFolder.Text, "yyyy.MM.dd", String.Empty, txtEvent.Text);
-            //            Log.Information("Processed files: {@files}", result);
-            //            btnDoSort.IsEnabled = false;
-            //            string message = String.Format(
-            //                @"Processo concluido.
-            //{0} Fotos copiadas.
-            //{1} fotos repetidas.", result.Count(t => t.Status == CopyResult.Sucess), result.Count(t => t.Status == CopyResult.SameFileFound));
-            //            Log.Information(message);
-
-            //            gridResult.ItemsSource = result;
-
-            //            System.Windows.MessageBox.Show(message);
         }
 
         #endregion
