@@ -137,7 +137,7 @@ namespace FotoSorterLib
         /// <returns></returns>
         static public Tuple<CopyResult, string> SimpleFileCopy(string sourceFile, string targetFileName, string targetPath)
         {
-            string destFile = System.IO.Path.Combine(targetPath, targetFileName);
+            string destFile = Path.Combine(targetPath, targetFileName);
 
             // To copy a folder's contents to a new location:
             // Create a new target folder, if necessary.
@@ -159,12 +159,12 @@ namespace FotoSorterLib
                 }
 
                 string tempFileName = string.Format("{0}_{1}", fileNameOnly, count++);
-                destFile = System.IO.Path.Combine(targetPath, tempFileName + extension);
+                destFile = Path.Combine(targetPath, tempFileName + extension);
             }
             try
             {
-                System.IO.File.Copy(sourceFile, destFile);
-            } catch (System.Exception e)
+                File.Copy(sourceFile, destFile);
+            } catch (Exception e)
             {
                 return Tuple.Create(CopyResult.Error, "Erro: " + e.Message);
             }
