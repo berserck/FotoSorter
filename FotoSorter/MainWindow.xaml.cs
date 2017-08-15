@@ -89,39 +89,6 @@ namespace FotoSorter
             }
         }
 
-
-
-        static public ObservableCollection<CopyResults> CopyFiles(ObservableCollection<MyFile> files, string destFolderBase, string dateFormat, string fileName, string eventName = "")
-        {
-            var processed = new ObservableCollection<CopyResults>();
-            // loop over the files
-            int count = 0;
-            foreach (var item in files)
-            {
-                count++;
-                if (count % 10 == 0)
-                {
-
-                }
-                var destFolder = Path.Combine(destFolderBase, FotoSorterLib.FotoSorterLib.GetTimeFolder(item.CaptureDate), eventName);
-                // calculate the outfilename
-                var outFilename = item.CaptureDate?.ToString(dateFormat) + "_"
-                    + (String.IsNullOrEmpty(fileName) ? item.FileOutName : fileName)
-                    + item.FileOutExtension;
-                var result = FotoSorterLib.FotoSorterLib.SimpleFileCopy(item.FilenameIn, outFilename, destFolder);
-                processed.Add(new CopyResults()
-                {
-                    FilenameOrigin = item.FilenameIn,
-                    DestinationFolder = destFolder,
-                    Message = result.Item2,
-                    Status = result.Item1
-                });
-                //processed.Add(Tuple.Create(item.FilenameIn, destFolder, result));
-            }
-            return processed;
-        }
-
-
         private void SetExecuteButtonStatus()
         {
             btnDoSort.IsEnabled = (files.Count > 0) && !String.IsNullOrEmpty(lblOutFolder.Text);
@@ -204,7 +171,7 @@ namespace FotoSorter
 
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            var processed = new ObservableCollection<CopyResults>();
+           var processed = new ObservableCollection<CopyResults>();
             var arg = e.Argument as CopyArguments;
             // loop over the files
             int count = 0;
@@ -252,7 +219,8 @@ namespace FotoSorter
 
         private void ExecuteButtonClick(object sender, RoutedEventArgs e)
         {
-            BackgroundWorker worker = new BackgroundWorker();
+            copyStatus.Value = 0;
+           BackgroundWorker worker = new BackgroundWorker();
             worker.WorkerReportsProgress = true;
             worker.DoWork += worker_DoWork;
             worker.ProgressChanged += worker_ProgressChanged;
