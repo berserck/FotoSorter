@@ -29,7 +29,7 @@ namespace FotoSorterLib
                 directories = ImageMetadataReader.ReadMetadata(filename);
             } catch(MetadataExtractor.ImageProcessingException e)
             {
-
+                // TODO log error
             }
             var subIfdDirectory = directories?.OfType<ExifSubIfdDirectory>().FirstOrDefault();
             if (subIfdDirectory != null)
