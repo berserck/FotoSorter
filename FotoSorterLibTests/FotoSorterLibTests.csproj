@@ -52,9 +52,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\FotoSorterLib\FotoSorterLib.csproj">
       <Project>{1f95d934-e687-42e7-9337-eb19b3722108}</Project>
       <Name>FotoSorterLib</Name>
@@ -67,6 +64,9 @@
     <Content Include="TestPhotos\NoDate.jpg" />
     <Content Include="TestPhotos\NormalDate-2007.10.09.jpg" />
     <Content Include="TestPhotos\zeroDate.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
