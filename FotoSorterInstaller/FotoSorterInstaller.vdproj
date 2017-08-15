@@ -45,7 +45,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_4EFF4134E3414D98B5407084B9E5DB37"
+        "MsmKey" = "8:_52B952FC5CC24CBCBC62904887CCED3E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -260,6 +260,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
         "Release"
@@ -284,6 +292,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
     }
@@ -376,10 +392,10 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4EFF4134E3414D98B5407084B9E5DB37"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_52B952FC5CC24CBCBC62904887CCED3E"
             {
-            "SourcePath" = "8:..\\FotoSorter\\logo.ico"
-            "TargetName" = "8:logo.ico"
+            "SourcePath" = "8:..\\FotoSorter\\FotoSorter.ico"
+            "TargetName" = "8:FotoSorter.ico"
             "Tag" = "8:"
             "Folder" = "8:_7E655C73834E418B87F9DCDB94386CBC"
             "Condition" = "8:"
@@ -863,7 +879,7 @@
             "Target" = "8:_89A1A4638F304603B90BD85DE5E80FEB"
             "Folder" = "8:_D7126808D3504A97B44D5CCBA17E798A"
             "WorkingFolder" = "8:_7E655C73834E418B87F9DCDB94386CBC"
-            "Icon" = "8:_4EFF4134E3414D98B5407084B9E5DB37"
+            "Icon" = "8:_52B952FC5CC24CBCBC62904887CCED3E"
             "Feature" = "8:"
             }
         }
