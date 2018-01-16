@@ -30,9 +30,9 @@ namespace FotoSorter
         }
 
 
-        private void UpdateInuputFolder(string newFolder)
+        private void UpdateInputFolder(string newFolder)
         {
-            Log.Information("Starting UpdateInuputFolder");
+            Log.Information("Starting UpdateInputFolder");
             files.Clear();
             try
             {
@@ -66,7 +66,7 @@ namespace FotoSorter
                 {
                     if (source.Name == "btnSource")
                     {
-                        UpdateInuputFolder(dialog.SelectedPath);
+                        UpdateInputFolder(dialog.SelectedPath);
                     }
                     if (source.Name == "btnDest")
                     {
@@ -119,7 +119,7 @@ namespace FotoSorter
                 var folder = FotoSorterLib.FotoSorterLib.GetPath(fullPath);
                 Log.Information("File Drop: {@original} turned into {@folder}", fullPath, folder);
                 lblInFolder.Text = folder;
-                UpdateInuputFolder(folder);
+                UpdateInputFolder(folder);
             }
             e.Handled = true;
         }
