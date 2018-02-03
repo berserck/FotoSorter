@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Configuration;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Windows;
 
 namespace FotoSorter
@@ -17,8 +16,8 @@ namespace FotoSorter
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ObservableCollection<MyFile> files = new ObservableCollection<MyFile>();
-        private string _previousSourceFolder = null;
+        private ObservableCollection<MyFile> _files = new ObservableCollection<MyFile>();
+        private string _previousSourceFolder;
 
         public MainWindow()
         {
@@ -33,13 +32,12 @@ namespace FotoSorter
         private void UpdateInputFolder(string newFolder)
         {
             Log.Information("Starting UpdateInputFolder");
-            files.Clear();
+            _files.Clear();
             try
             {
-                files = FotoSorterLib.FotoSorterLib.PrepareFiles(newFolder);
-                //lbInFiles.ItemsSource = files;
-                gridResult.ItemsSource = files;
-                Log.Information("Files Found {@files}", files);
+                _files = FotoSorterLib.FotoSorterLib.PrepareFiles(newFolder);
+                gridResult.ItemsSource = _files;
+                Log.Information("Files Found {@files}", _files);
             }
             catch (System.UnauthorizedAccessException e)
             {
@@ -92,7 +90,7 @@ namespace FotoSorter
 
         private void SetExecuteButtonStatus()
         {
-            btnDoSort.IsEnabled = (files.Count > 0) && !String.IsNullOrEmpty(lblOutFolder.Text);
+            btnDoSort.IsEnabled = (_files.Count > 0) && !String.IsNullOrEmpty(lblOutFolder.Text);
         }
 
         #region DragnDrop
@@ -172,12 +170,12 @@ namespace FotoSorter
 
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
-           var processed = new ObservableCollection<CopyResults>();
+            var processed = new ObservableCollection<CopyResults>();
             var arg = e.Argument as CopyArguments;
             // loop over the files
             int count = 0;
-            int total = files.Count;
-            foreach (var item in files)
+            int total = _files.Count;
+            foreach (var item in _files)
             {
                 count++;
                 if (count % 5 == 0)
@@ -198,7 +196,7 @@ namespace FotoSorter
                     Message = result.Item2,
                     Status = result.Item1
                 });
-                
+
             }
             e.Result = processed;
         }
@@ -221,15 +219,15 @@ namespace FotoSorter
         private void ExecuteButtonClick(object sender, RoutedEventArgs e)
         {
             copyStatus.Value = 0;
-           BackgroundWorker worker = new BackgroundWorker();
+            BackgroundWorker worker = new BackgroundWorker();
             worker.WorkerReportsProgress = true;
             worker.DoWork += worker_DoWork;
             worker.ProgressChanged += worker_ProgressChanged;
             worker.RunWorkerCompleted += worker_RunWorkerCompleted;
 
-            Log.Information("Starting to process files: {@files}", files);
+            Log.Information("Starting to process files: {@files}", _files);
 
-            var arg = new CopyArguments() { Files = files, DestFolderBase = lblOutFolder.Text, DateFormat = "yyyy.MM.dd", FileName = String.Empty, EventName = txtEvent.Text };
+            var arg = new CopyArguments() { Files = _files, DestFolderBase = lblOutFolder.Text, DateFormat = "yyyy.MM.dd", FileName = String.Empty, EventName = txtEvent.Text };
             worker.RunWorkerAsync(arg);
         }
 

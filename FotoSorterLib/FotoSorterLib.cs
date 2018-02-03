@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing.Imaging;
 using MetadataExtractor;
 using MetadataExtractor.Formats.Exif;
 using System.Diagnostics;
@@ -192,7 +189,7 @@ namespace FotoSorterLib
         /// <summary>
         /// From https://stackoverflow.com/questions/1358510/how-to-compare-2-files-fast-using-net
         /// </summary>
-        const int BYTES_TO_READ = sizeof(Int64);
+        const int BytesToRead = sizeof(Int64);
         static public bool FilesAreEqual(string firstFileName, string secondFileName)
         {
 
@@ -205,18 +202,18 @@ namespace FotoSorterLib
             if (first.FullName == second.FullName)
                 return true;
 
-            int iterations = (int)Math.Ceiling((double)first.Length / BYTES_TO_READ);
+            int iterations = (int)Math.Ceiling((double)first.Length / BytesToRead);
 
             using (FileStream fs1 = first.OpenRead())
             using (FileStream fs2 = second.OpenRead())
             {
-                byte[] one = new byte[BYTES_TO_READ];
-                byte[] two = new byte[BYTES_TO_READ];
+                byte[] one = new byte[BytesToRead];
+                byte[] two = new byte[BytesToRead];
 
                 for (int i = 0; i < iterations; i++)
                 {
-                    fs1.Read(one, 0, BYTES_TO_READ);
-                    fs2.Read(two, 0, BYTES_TO_READ);
+                    fs1.Read(one, 0, BytesToRead);
+                    fs2.Read(two, 0, BytesToRead);
 
                     if (BitConverter.ToInt64(one, 0) != BitConverter.ToInt64(two, 0))
                         return false;
@@ -234,22 +231,22 @@ namespace FotoSorterLib
 
     public class MyFile
     {
-        private string filenameIn;
+        private string _filenameIn;
 
         public string FilenameOrigin
         {
-            get { return filenameIn; }
-            set { filenameIn = value; }
+            get { return _filenameIn; }
+            set { _filenameIn = value; }
         }
         public string FileOutName
-        { get { return Path.GetFileNameWithoutExtension(filenameIn); } }
+        { get { return Path.GetFileNameWithoutExtension(_filenameIn); } }
 
         public string FileOutExtension
-        { get { return Path.GetExtension(filenameIn); } }
+        { get { return Path.GetExtension(_filenameIn); } }
 
         public DateTime? CaptureDate
         {
-            get { return FotoSorterLib.GetPhotoDate(filenameIn); }
+            get { return FotoSorterLib.GetPhotoDate(_filenameIn); }
         }
         public string DestinationFolder { get; set; }
         public string Message { get; set; }
