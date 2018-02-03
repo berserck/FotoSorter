@@ -180,7 +180,7 @@ namespace FotoSorter
                 count++;
                 if (count % 5 == 0)
                 {
-                    int progress = (int)(((double)count / (double)total) * 100);
+                    int progress = (int)(((double)count / total) * 100);
                     (sender as BackgroundWorker).ReportProgress(progress);
                 }
                 var destFolder = Path.Combine(arg.DestFolderBase, FotoSorterLib.FotoSorterLib.GetTimeFolder(item.CaptureDate), arg.EventName);
