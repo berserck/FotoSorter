@@ -8,7 +8,7 @@ namespace FotoSorterCli
     class Program
     {
 
-        static public DateTime GetPhotoDate(string filename)
+        public static DateTime GetPhotoDate(string filename)
         {
             // open image
             IEnumerable<Directory> directories = ImageMetadataReader.ReadMetadata(filename);

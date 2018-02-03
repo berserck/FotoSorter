@@ -16,7 +16,7 @@ namespace FotoSorterLib
     public static class FotoSorterLib
     {
 
-        static public DateTime GetPhotoDate(string filename)
+        public static DateTime GetPhotoDate(string filename)
         {
             var dateTime = DateTime.MinValue.ToString("yyyy:MM:dd HH:mm:ss");
             // open image
@@ -44,7 +44,7 @@ namespace FotoSorterLib
             return DateTime.ParseExact(dateTime, "yyyy:MM:dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
         }
 
-        static public string GetOutFilename(string fullPath)
+        public static string GetOutFilename(string fullPath)
         {
             int count = 1;
 
@@ -61,7 +61,7 @@ namespace FotoSorterLib
             return newFullPath;
         }
 
-        static public ObservableCollection<MyFile> PrepareFiles(string inFolder)
+        public static ObservableCollection<MyFile> PrepareFiles(string inFolder)
         {
             var files = new ObservableCollection<MyFile>();
             var dirInfo = new DirectoryInfo(inFolder);
@@ -78,7 +78,7 @@ namespace FotoSorterLib
             return files;
         }
 
-        static public string GetTimeFolder(DateTime? date)
+        public static string GetTimeFolder(DateTime? date)
         {
             if (date == null)
             {
@@ -88,39 +88,6 @@ namespace FotoSorterLib
         }
 
         /// <summary>
-        /// This function will get a list of files representing photos ad it will produce files in teh form:
-        /// <destFolderBase>/<year>/<month>/<date in dateformat>_<original name or fileName if given>_<counter if destination file exists>.<extension>
-        /// </summary>
-        /// <param name="files">List of files found</param>
-        /// <param name="destFolderBase">Starting folder were the year/month folders are created</param>
-        /// <param name="dateFormat"> String used to format the Time in the filename</param>
-        /// <param name="fileName">Base filename to write</param>
-        /// <returns></returns>
-        //static public ObservableCollection<CopyResults> CopyFiles(ObservableCollection<MyFile> files, string destFolderBase, string dateFormat, string fileName, string eventName="")
-        //{
-        //    var processed = new ObservableCollection<CopyResults>();
-        //    // loop over the files
-        //    foreach (var item in files)
-        //    {
-        //        var destFolder = Path.Combine(destFolderBase, GetTimeFolder(item.CaptureDate), eventName);
-        //        // calculate the outfilename
-        //        var outFilename = item.CaptureDate?.ToString(dateFormat) + "_"
-        //            + (String.IsNullOrEmpty(fileName) ? item.FileOutName : fileName) 
-        //            + item.FileOutExtension;
-        //        var result = SimpleFileCopy(item.FilenameIn, outFilename, destFolder);
-        //        processed.Add(new CopyResults()
-        //        {
-        //            FilenameOrigin = item.FilenameIn,
-        //            DestinationFolder = destFolder,
-        //            Message = result.Item2,
-        //            Status = result.Item1
-        //        });
-        //        //processed.Add(Tuple.Create(item.FilenameIn, destFolder, result));
-        //    }
-        //    return processed;
-        //}
-
-        /// <summary>
         /// code mix of https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/file-system/how-to-copy-delete-and-move-files-and-folders
         ///  and https://stackoverflow.com/questions/13049732/automatically-rename-a-file-if-it-already-exists-in-windows-way#
         /// </summary>
@@ -128,7 +95,7 @@ namespace FotoSorterLib
         /// <param name="targetFileName"></param>
         /// <param name="targetPath"></param>
         /// <returns></returns>
-        static public Tuple<CopyResult, string> SimpleFileCopy(string sourceFile, string targetFileName, string targetPath)
+        public static Tuple<CopyResult, string> SimpleFileCopy(string sourceFile, string targetFileName, string targetPath)
         {
             string destFile = Path.Combine(targetPath, targetFileName);
 
@@ -170,7 +137,7 @@ namespace FotoSorterLib
         /// </summary>
         /// <param name="fullPath"></param>
         /// <returns></returns>
-        static public string GetPath(string fullPath)
+        public static string GetPath(string fullPath)
         {
             bool isFolder = File.GetAttributes(fullPath).HasFlag(FileAttributes.Directory);
             if (!isFolder)
@@ -190,7 +157,7 @@ namespace FotoSorterLib
         /// From https://stackoverflow.com/questions/1358510/how-to-compare-2-files-fast-using-net
         /// </summary>
         const int BytesToRead = sizeof(Int64);
-        static public bool FilesAreEqual(string firstFileName, string secondFileName)
+        public static bool FilesAreEqual(string firstFileName, string secondFileName)
         {
 
             FileInfo first = new FileInfo(firstFileName);
