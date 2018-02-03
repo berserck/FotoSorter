@@ -25,7 +25,7 @@ namespace FotoSorterLib
             {
                 directories = ImageMetadataReader.ReadMetadata(filename);
             }
-            catch (MetadataExtractor.ImageProcessingException e)
+            catch (ImageProcessingException e)
             {
                 // TODO log error
             }

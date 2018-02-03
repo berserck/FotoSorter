@@ -22,7 +22,7 @@ namespace FotoSorter
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = this;
+            DataContext = this;
             lblInFolder.Text = String.Empty;
             lblOutFolder.Text = ConfigurationManager.AppSettings["destinationFolder"];
             Log.Information("Starting finish initializing main window!");
@@ -39,9 +39,9 @@ namespace FotoSorter
                 gridResult.ItemsSource = _files;
                 Log.Information("Files Found {@files}", _files);
             }
-            catch (System.UnauthorizedAccessException e)
+            catch (UnauthorizedAccessException e)
             {
-                System.Windows.MessageBox.Show("Erro: " + e.Message, "Error a procurar as fotos");
+                MessageBox.Show("Erro: " + e.Message, "Error a procurar as fotos");
                 Log.Error(e.Message);
             }
             lblInFolder.Text = newFolder;
