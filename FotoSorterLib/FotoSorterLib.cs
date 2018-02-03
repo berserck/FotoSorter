@@ -27,7 +27,8 @@ namespace FotoSorterLib
             try
             {
                 directories = ImageMetadataReader.ReadMetadata(filename);
-            } catch(MetadataExtractor.ImageProcessingException e)
+            }
+            catch (MetadataExtractor.ImageProcessingException e)
             {
                 // TODO log error
             }
@@ -42,7 +43,7 @@ namespace FotoSorterLib
                     dateTime = DateTime.MinValue.ToString("yyyy:MM:dd HH:mm:ss");
                 }
             }
-          
+
             return DateTime.ParseExact(dateTime, "yyyy:MM:dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
         }
 
@@ -75,12 +76,7 @@ namespace FotoSorterLib
             {
                 Trace.WriteLine($"Processing file {item.FullName}");
                 var filenameIn = item.FullName;
-                var date = GetPhotoDate(filenameIn);
-                var captureDate = GetPhotoDate(filenameIn);
-                var fileOutName = Path.GetFileNameWithoutExtension(filenameIn);
-                var extension = Path.GetExtension(item.Name);
-
-                files.Add(new MyFile() { FilenameIn = item.FullName, FileOutName = fileOutName, FileOutExtension = extension, CaptureDate = captureDate });
+                files.Add(new MyFile() { FilenameIn = item.FullName});
             }
             return files;
         }
@@ -155,7 +151,7 @@ namespace FotoSorterLib
                 // test if the file is the same
                 if (FilesAreEqual(sourceFile, destFile))
                 {
-                    return  Tuple.Create(CopyResult.SameFileFound, "O mesmo ficheiro já existe.");
+                    return Tuple.Create(CopyResult.SameFileFound, "O mesmo ficheiro já existe.");
                 }
 
                 string tempFileName = string.Format("{0}_{1}", fileNameOnly, count++);
@@ -164,7 +160,8 @@ namespace FotoSorterLib
             try
             {
                 File.Copy(sourceFile, destFile);
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 return Tuple.Create(CopyResult.Error, "Erro: " + e.Message);
             }
@@ -183,7 +180,8 @@ namespace FotoSorterLib
             {
                 return new FileInfo(fullPath).Directory.FullName;
 
-            } else
+            }
+            else
             {
                 return fullPath;
 
@@ -236,10 +234,26 @@ namespace FotoSorterLib
 
     public class MyFile
     {
-        public string FilenameIn { get; set; }
-        public string FileOutName { get; set; }
-        public string FileOutExtension { get; set; }
-        public DateTime? CaptureDate { get; set; }
+        private string filenameIn;
+
+        public string FilenameIn
+        {
+            get { return filenameIn; }
+            set { filenameIn = value; }
+        }
+        public string FileOutName
+        { get { return Path.GetFileNameWithoutExtension(filenameIn); } }
+
+        public string FileOutExtension
+        { get { return Path.GetExtension(filenameIn); } }
+
+        public DateTime? CaptureDate
+        {
+            get { return FotoSorterLib.GetPhotoDate(filenameIn); }
+        }
+        public string DestinationFolder { get; set; }
+        public string Message { get; set; }
+        public CopyResult Status { get; set; }
     }
 
     public class CopyResults
