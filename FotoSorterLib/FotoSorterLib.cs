@@ -30,15 +30,15 @@ namespace FotoSorterLib
                 // TODO log error
             }
             var subIfdDirectory = directories?.OfType<ExifSubIfdDirectory>().FirstOrDefault();
-            if (subIfdDirectory != null)
-            {
-                dateTime = subIfdDirectory?.GetDescription(ExifDirectoryBase.TagDateTimeOriginal) ?? DateTime.MinValue.ToString("yyyy:MM:dd HH:mm:ss");
+            if (subIfdDirectory == null)
+                return DateTime.ParseExact(dateTime, "yyyy:MM:dd HH:mm:ss",
+                    System.Globalization.CultureInfo.InvariantCulture);
+            dateTime = subIfdDirectory.GetDescription(ExifDirectoryBase.TagDateTimeOriginal) ?? DateTime.MinValue.ToString("yyyy:MM:dd HH:mm:ss");
 
-                // found pictures with date = "0000:00:00 00:00:00", this is before DateTime.MinValu, so I'm setting date to min value in this case
-                if (dateTime.Equals("0000:00:00 00:00:00"))
-                {
-                    dateTime = DateTime.MinValue.ToString("yyyy:MM:dd HH:mm:ss");
-                }
+            // found pictures with date = "0000:00:00 00:00:00", this is before DateTime.MinValu, so I'm setting date to min value in this case
+            if (dateTime.Equals("0000:00:00 00:00:00"))
+            {
+                dateTime = DateTime.MinValue.ToString("yyyy:MM:dd HH:mm:ss");
             }
 
             return DateTime.ParseExact(dateTime, "yyyy:MM:dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
@@ -72,8 +72,7 @@ namespace FotoSorterLib
             foreach (var item in info)
             {
                 Trace.WriteLine($"Processing file {item.FullName}");
-                var filenameIn = item.FullName;
-                files.Add(new MyFile() { FilenameOrigin = item.FullName});
+                files.Add(new MyFile() { FilenameOrigin = item.FullName });
             }
             return files;
         }
@@ -84,7 +83,7 @@ namespace FotoSorterLib
             {
                 return "desconhecido";
             }
-            return date?.Year.ToString() + "\\" + date?.Month.ToString().PadLeft(2, '0');
+            return date.Value.Year.ToString() + "\\" + date.Value.Month.ToString().PadLeft(2, '0');
         }
 
         /// <summary>
@@ -118,7 +117,7 @@ namespace FotoSorterLib
                     return Tuple.Create(CopyResult.SameFileFound, "O mesmo ficheiro já existe.");
                 }
 
-                string tempFileName = string.Format("{0}_{1}", fileNameOnly, count++);
+                string tempFileName = $"{fileNameOnly}_{count++}";
                 destFile = Path.Combine(targetPath, tempFileName + extension);
             }
             try
@@ -142,13 +141,11 @@ namespace FotoSorterLib
             bool isFolder = File.GetAttributes(fullPath).HasFlag(FileAttributes.Directory);
             if (!isFolder)
             {
-                return new FileInfo(fullPath).Directory.FullName;
-
+                return new FileInfo(fullPath).Directory?.FullName;
             }
             else
             {
                 return fullPath;
-
             }
         }
 
