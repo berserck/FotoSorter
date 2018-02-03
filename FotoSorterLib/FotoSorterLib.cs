@@ -76,7 +76,7 @@ namespace FotoSorterLib
             {
                 Trace.WriteLine($"Processing file {item.FullName}");
                 var filenameIn = item.FullName;
-                files.Add(new MyFile() { FilenameIn = item.FullName});
+                files.Add(new MyFile() { FilenameOrigin = item.FullName});
             }
             return files;
         }
@@ -236,7 +236,7 @@ namespace FotoSorterLib
     {
         private string filenameIn;
 
-        public string FilenameIn
+        public string FilenameOrigin
         {
             get { return filenameIn; }
             set { filenameIn = value; }

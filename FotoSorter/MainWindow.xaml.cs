@@ -38,6 +38,7 @@ namespace FotoSorter
             {
                 files = FotoSorterLib.FotoSorterLib.PrepareFiles(newFolder);
                 //lbInFiles.ItemsSource = files;
+                gridResult.ItemsSource = files;
                 Log.Information("Files Found {@files}", files);
             }
             catch (System.UnauthorizedAccessException e)
@@ -189,10 +190,10 @@ namespace FotoSorter
                 var outFilename = item.CaptureDate?.ToString(arg.DateFormat) + "_"
                     + (String.IsNullOrEmpty(arg.FileName) ? item.FileOutName : arg.FileName)
                     + item.FileOutExtension;
-                var result = FotoSorterLib.FotoSorterLib.SimpleFileCopy(item.FilenameIn, outFilename, destFolder);
+                var result = FotoSorterLib.FotoSorterLib.SimpleFileCopy(item.FilenameOrigin, outFilename, destFolder);
                 processed.Add(new CopyResults()
                 {
-                    FilenameOrigin = item.FilenameIn,
+                    FilenameOrigin = item.FilenameOrigin,
                     DestinationFolder = destFolder,
                     Message = result.Item2,
                     Status = result.Item1
