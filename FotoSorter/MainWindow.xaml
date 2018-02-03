@@ -40,10 +40,7 @@
             <Button Name="btnSource" Grid.Column="1" Click="Button_Click">Onde estao as fotos</Button>
         </Grid>
 
-        <Label FontWeight="Bold" >Imagens encontradas:</Label>
-        <ListBox Name="lbInFiles" Height="200"
-                 DisplayMemberPath="FilenameIn"
-                 Margin="10,10,10,20" Grid.RowSpan="3"></ListBox>
+            <Label FontWeight="Bold" Content="Directorio de Destino" />
         </StackPanel>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>

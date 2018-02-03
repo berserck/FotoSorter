@@ -37,7 +37,7 @@ namespace FotoSorter
             try
             {
                 files = FotoSorterLib.FotoSorterLib.PrepareFiles(newFolder);
-                lbInFiles.ItemsSource = files;
+                //lbInFiles.ItemsSource = files;
                 Log.Information("Files Found {@files}", files);
             }
             catch (System.UnauthorizedAccessException e)
