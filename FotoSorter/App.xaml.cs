@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using Serilog;
-
+using Serilog.Sinks.SystemConsole.Themes;
 
 namespace FotoSorter
 {
@@ -14,8 +14,8 @@ namespace FotoSorter
 
             Log.Logger = new LoggerConfiguration()
                .MinimumLevel.Debug()
-               .WriteTo.LiterateConsole()
-               .WriteTo.RollingFile("c:\\temp\\logs\\FotoSorter-{Date}.txt")
+               .WriteTo.Console(theme: SystemConsoleTheme.Literate)
+               .WriteTo.File("c:\\temp\\logs\\FotoSorterLog.txt", rollingInterval: RollingInterval.Day)
                .CreateLogger();
 
             Log.Information("Starting FotoSorter!");
